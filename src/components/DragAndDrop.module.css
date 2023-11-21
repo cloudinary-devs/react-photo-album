@@ -1,0 +1,14 @@
+.dragArea {
+  width: 600px;
+  height: 400px;
+  border: 2px dashed #000;
+  background-color: #eee;
+  padding: 20px;
+  text-align: center;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.dragOver {
+  border-color: #2196f3;
+  background-color: #87ff8f;
+}
