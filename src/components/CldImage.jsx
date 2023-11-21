@@ -20,7 +20,7 @@ const CldImage = ({ publicId }) => {
     <AdvancedImage
       cldImg={myImage}
       style={{ maxWidth: '100%' }}
-      // plugins={[responsive(), placeholder()]}
+      plugins={[responsive(), placeholder()]}
       className="w-full h-64 object-cover max-w-sm rounded-lg shadow-2xl"
     />
   );
