@@ -29,7 +29,7 @@ const DragAndDrop = () => {
         try {
           const formData = new FormData();
           formData.append('file', file);
-          formData.append('upload_preset', 'sample-pa');
+          formData.append('upload_preset', import.meta.env.VITE_UPLOAD_PRESET);
           formData.append('tags', ['myphotoalbum-react']);
           formData.append('multiple', true);
           const options = {
