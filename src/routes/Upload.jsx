@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 
 const Upload = () => {
   const [loaded, setLoaded] = useState(false);
-  const [uploadedImage, setUploadedImage] = useState('');
+  const [uploadedImages, setUploadedImages] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
     const uwScript = document.getElementById('uw');
@@ -17,33 +18,72 @@ const Upload = () => {
   }, [loaded]);
 
   const processResults = (error, result) => {
+    if (result.event === 'close') {
+      setIsDisabled(false);
+    }
     if (result && result.event === 'success') {
-      setUploadedImage(result.info.secure_url);
-      // setPublicId(result.info.public_id);
+      const secureUrl = result.info.secure_url;
+      const previewUrl = secureUrl.replace('/upload/', '/upload/w_400/');
+      setUploadedImages((prevImages) => [...prevImages, previewUrl]);
+      setIsDisabled(false);
+    }
+    if (error) {
+      setIsDisabled(false);
     }
   };
   const cloudName = import.meta.env.VITE_CLOUD_NAME;
   const uploadPreset = import.meta.env.VITE_UPLOAD_PRESET;
 
   const uploadWidget = () => {
+    setIsDisabled(true);
     window.cloudinary.openUploadWidget(
       {
         cloudName,
         uploadPreset,
         sources: ['local', 'url'],
         tags: ['myphotoalbum-react'],
+        resourceType: 'image',
       },
       processResults
     );
   };
   return (
     <div className="m-2 space-y-4">
-      <h1 className="text-5xl font-bold">Welcome</h1>
-      <p>This example shows how to use the upload widget</p>
-      <button className="btn btn-primary" type="button" onClick={uploadWidget}>
-        Upload File
+      <h1 className="text-5xl font-bold">Upload (Upload Widget)</h1>
+      <p className="m-2">
+        This example shows how to integrate the Cloudinary Upload Widget to a
+        React application.
+      </p>
+      <div className="m-2">
+        Please note that the following defaults are being used:
+        <ul className="list-disc list-inside">
+          <li>
+            The upload location is limited to the local filesystem or to a
+            remote URL.
+          </li>
+          <li>
+            The{' '}
+            <code className="bg-black text-gray-100 px-2 py-1 rounded-md text-sm">
+              myphotoalbum-react
+            </code>{' '}
+            tag gets added to all photos uploaded via this method (this is used
+            in the photo album to retrieve images)
+          </li>
+          <li>Only images can be uploaded</li>
+        </ul>
+      </div>
+      <button
+        disabled={isDisabled}
+        className={`btn btn-primary ${isDisabled ? 'btn-disabled' : ''}`}
+        type="button"
+        onClick={uploadWidget}
+      >
+        Upload Image
       </button>
-      {uploadedImage && <img src={uploadedImage} alt="uploaded image" />}
+      {uploadedImages &&
+        uploadedImages.map((uploadedImage, idx) => (
+          <img key={idx} src={uploadedImage} alt="uploaded image" />
+        ))}
     </div>
   );
 };

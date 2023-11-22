@@ -4,6 +4,7 @@ import { useState } from 'react';
 const DragAndDrop = () => {
   const [dragOver, setDragOver] = useState(false);
   const [droppedFiles, setDroppedFiles] = useState([]);
+  const [loadingStates, setLoadingStates] = useState([]);
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ const DragAndDrop = () => {
 
     const files = Array.from(e.dataTransfer.files);
     setDroppedFiles([]);
+    setLoadingStates(new Array(files.length).fill(true));
 
     if (files && files.length > 0) {
       const url = `https://api.cloudinary.com/v1_1/${
@@ -28,10 +30,18 @@ const DragAndDrop = () => {
       for (let file of files) {
         try {
           const formData = new FormData();
-          formData.append('file', file);
-          formData.append('upload_preset', import.meta.env.VITE_UPLOAD_PRESET);
-          formData.append('tags', ['myphotoalbum-react']);
-          formData.append('multiple', true);
+          const fields = {
+            file: file,
+            upload_preset: import.meta.env.VITE_UPLOAD_PRESET,
+            tags: ['myphotoalbum-react'],
+            multiple: true,
+            resource_type: 'image',
+          };
+
+          Object.entries(fields).forEach(([key, value]) => {
+            formData.append(key, value);
+          });
+
           const options = {
             method: 'POST',
             body: formData,
@@ -42,11 +52,21 @@ const DragAndDrop = () => {
           }
           const json = await response.json();
           const secureUrl = json.secure_url;
-          const previewUrl = secureUrl.replace('/upload/', '/upload/w_250/');
+          const previewUrl = secureUrl.replace('/upload/', '/upload/w_400/');
 
           setDroppedFiles((prevFiles) => [...prevFiles, { file, previewUrl }]);
+          setLoadingStates((prevStates) =>
+            prevStates.map((state, index) =>
+              file === files[index] ? false : state
+            )
+          );
         } catch (error) {
           console.error(error);
+          setLoadingStates((prevStates) =>
+            prevStates.map((state, index) =>
+              file === files[index] ? false : state
+            )
+          );
         }
       }
     }
@@ -60,11 +80,17 @@ const DragAndDrop = () => {
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
       >
-        <p>Drag and drop files here</p>
+        <p>Drag and drop images here</p>
       </div>
-      {droppedFiles.length > 0 && (
+      {loadingStates.some((loading) => loading) && (
+        <>
+          <p>Image upload in progress</p>
+          <span className="loading loading-spinner text-primary"></span>
+        </>
+      )}
+      {droppedFiles.length !== 0 && (
         <div>
-          <h2>Dropped files:</h2>
+          <h2>Uploaded images:</h2>
           <ul>
             {droppedFiles.map((droppedFile, index) => (
               <li key={index}>
