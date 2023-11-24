@@ -4,7 +4,7 @@ const Welcome = () => {
       <h1 className="text-5xl font-bold m-2">Welcome</h1>
       <p className="m-2">
         This sample project shows how to use the{' '}
-        <a className="underline text-blue-500" href="">
+        <a className="underline text-blue-500" href="https://cloudinary.com/documentation/react_integration">
           Cloudinary React SDK
         </a>
       </p>
@@ -12,15 +12,14 @@ const Welcome = () => {
         The following pieces of functionality are exposed in this app:
         <ul className="list-disc list-inside">
           <li>
-            Upload (Upload Widget): shows an example implementation of the
-            Upload Widget
+            <a className="underline text-blue-500" href="./upload">Upload (Upload Widget)</a>: shows an example implementation of the <a className="underline text-blue-500" href="https://cloudinary.com/documentation/upload_widget">Upload Widget</a>
           </li>
           <li>
-            API Upload: shows an example on how to use the Upload API to Uplaod
+          <a className="underline text-blue-500" href="./apiupload">API Upload</a>: shows an example of how to use the <a className="underline text-blue-500" href="https://cloudinary.com/documentation/image_upload_api_reference">Upload API</a> to upload
             from a React context
           </li>
           <li>
-            Photo Album: shows how to display images from a Cloudinary account
+          <a className="underline text-blue-500" href="./album">Photo Album</a>: shows how to display images from a Cloudinary account
           </li>
         </ul>
       </div>
