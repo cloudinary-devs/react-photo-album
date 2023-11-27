@@ -43,6 +43,7 @@ const Upload = () => {
         sources: ['local', 'url'],
         tags: ['myphotoalbum-react'],
         resourceType: 'image',
+        clientAllowedFormats: ['jpg', 'jpeg', 'png', 'heic'],
       },
       processResults
     );

@@ -36,6 +36,7 @@ const DragAndDrop = () => {
             tags: ['myphotoalbum-react'],
             multiple: true,
             resource_type: 'image',
+            // allowed_formats: ['jpg', 'jpeg', 'png', 'heic'],
           };
 
           Object.entries(fields).forEach(([key, value]) => {
