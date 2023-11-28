@@ -68,9 +68,9 @@ const Upload = () => {
               myphotoalbum-react
             </code>{' '}
             tag gets added to all photos uploaded via this method (this is used
-            in the photo album to retrieve images)
+            in the photo album to retrieve images).
           </li>
-          <li>Only images can be uploaded</li>
+          <li>Only images can be uploaded.</li>
         </ul>
       </div>
       <button
