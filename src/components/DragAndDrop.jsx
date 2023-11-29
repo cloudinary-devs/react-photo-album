@@ -56,7 +56,10 @@ const DragAndDrop = () => {
           }
           const json = await response.json();
           const secureUrl = json.secure_url;
-          const previewUrl = secureUrl.replace('/upload/', '/upload/w_400/');
+          const previewUrl = secureUrl.replace(
+            '/upload/',
+            '/upload/w_400/f_auto,q_auto/'
+          );
 
           setDroppedFiles((prevFiles) => [...prevFiles, { file, previewUrl }]);
           setLoadingStates((prevStates) =>
@@ -101,9 +104,21 @@ const DragAndDrop = () => {
         </>
       )}
       {droppedFiles.length !== 0 && (
-        <div>
-          <h2>Uploaded images:</h2>
-          <ul>
+        <div className="flex flex-wrap">
+          <h2 className="w-full text-xl font-bold">Uploaded images</h2>
+          {droppedFiles.map((droppedFile, idx) => (
+            <div
+              key={idx}
+              className="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 p-4"
+            >
+              <img
+                className="w-full"
+                src={droppedFile.previewUrl}
+                alt={`Preview of ${droppedFile.file.name}`}
+              />
+            </div>
+          ))}
+          {/* <ul>
             {droppedFiles.map((droppedFile, index) => (
               <li key={index}>
                 <strong>{droppedFile.file.name}</strong>
@@ -119,7 +134,7 @@ const DragAndDrop = () => {
                 />
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       )}
     </>

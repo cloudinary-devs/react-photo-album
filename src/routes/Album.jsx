@@ -3,6 +3,7 @@ import CldImage from '../components/CldImage';
 
 const Album = () => {
   const [photos, setPhotos] = useState('');
+  const [loading, setLoading] = useState(true);
   const getData = async (tag) => {
     const response = await fetch(
       `https://res.cloudinary.com/${
@@ -11,6 +12,7 @@ const Album = () => {
     );
     const data = await response.json();
     setPhotos(data);
+    setLoading(false);
   };
   useEffect(() => {
     getData('myphotoalbum-react');
@@ -52,7 +54,8 @@ const Album = () => {
           </li>
         </ul>
       </div>
-      {photos && (
+      {loading && <p className="font-bold">Loading gallery</p>}
+      {!loading && photos.length !== 0 ? (
         <div className="flex flex-wrap -mx-4">
           {photos.resources.map((photo, idx) => {
             return (
@@ -62,6 +65,11 @@ const Album = () => {
             );
           })}
         </div>
+      ) : (
+        <p className="text-xl p-4">
+          No photos to list. Please make sure that you have uploaded some images
+          using this app.
+        </p>
       )}
     </div>
   );

@@ -23,7 +23,10 @@ const Upload = () => {
     }
     if (result && result.event === 'success') {
       const secureUrl = result.info.secure_url;
-      const previewUrl = secureUrl.replace('/upload/', '/upload/w_400/');
+      const previewUrl = secureUrl.replace(
+        '/upload/',
+        '/upload/w_400/f_auto,q_auto/'
+      );
       setUploadedImages((prevImages) => [...prevImages, previewUrl]);
       setIsDisabled(false);
     }
@@ -79,12 +82,26 @@ const Upload = () => {
         type="button"
         onClick={uploadWidget}
       >
-        Upload Image
+        {isDisabled ? 'Opening Widget' : 'Upload Image'}
       </button>
-      {uploadedImages &&
-        uploadedImages.map((uploadedImage, idx) => (
-          <img key={idx} src={uploadedImage} alt="uploaded image" />
-        ))}
+
+      {uploadedImages.length !== 0 && (
+        <div className="flex flex-wrap">
+          <h2 className="w-full text-xl font-bold">Uploaded images</h2>
+          {uploadedImages.map((uploadedImage, idx) => (
+            <div
+              key={idx}
+              className="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/4 p-4"
+            >
+              <img
+                className="w-full"
+                src={uploadedImage}
+                alt="uploaded image"
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
