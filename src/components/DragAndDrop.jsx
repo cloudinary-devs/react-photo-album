@@ -1,10 +1,11 @@
 import styles from './DragAndDrop.module.css';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const DragAndDrop = () => {
   const [dragOver, setDragOver] = useState(false);
   const [droppedFiles, setDroppedFiles] = useState([]);
   const [loadingStates, setLoadingStates] = useState([]);
+  const abortControllerRef = useRef(new AbortController());
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -23,6 +24,8 @@ const DragAndDrop = () => {
     setDroppedFiles([]);
     setLoadingStates(new Array(files.length).fill(true));
 
+    abortControllerRef.current.abort();
+    abortControllerRef.current = new AbortController();
     if (files && files.length > 0) {
       const url = `https://api.cloudinary.com/v1_1/${
         import.meta.env.VITE_CLOUD_NAME
@@ -31,12 +34,11 @@ const DragAndDrop = () => {
         try {
           const formData = new FormData();
           const fields = {
-            file: file,
+            file,
             upload_preset: import.meta.env.VITE_UPLOAD_PRESET,
             tags: ['myphotoalbum-react'],
             multiple: true,
             resource_type: 'image',
-            // allowed_formats: ['jpg', 'jpeg', 'png', 'heic'],
           };
 
           Object.entries(fields).forEach(([key, value]) => {
@@ -46,6 +48,7 @@ const DragAndDrop = () => {
           const options = {
             method: 'POST',
             body: formData,
+            signal: abortControllerRef.current.signal,
           };
           const response = await fetch(url, options);
           if (!response.ok) {
@@ -62,7 +65,9 @@ const DragAndDrop = () => {
             )
           );
         } catch (error) {
-          console.error(error);
+          if (error.name !== 'AbortError') {
+            console.error(error);
+          }
           setLoadingStates((prevStates) =>
             prevStates.map((state, index) =>
               file === files[index] ? false : state
@@ -72,6 +77,12 @@ const DragAndDrop = () => {
       }
     }
   };
+
+  useEffect(() => {
+    return () => {
+      abortControllerRef.current.abort();
+    };
+  }, []);
 
   return (
     <>

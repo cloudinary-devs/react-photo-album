@@ -42,9 +42,8 @@ const Upload = () => {
         uploadPreset,
         sources: ['local', 'url'],
         tags: ['myphotoalbum-react'],
-        clientAllowedFormats: ["image"],
+        clientAllowedFormats: ['image'],
         resourceType: 'image',
-        clientAllowedFormats: ['jpg', 'jpeg', 'png', 'heic'],
       },
       processResults
     );
@@ -60,8 +59,8 @@ const Upload = () => {
         Please note that the following defaults are being used:
         <ul className="list-disc list-inside">
           <li>
-            The upload source is limited to the local filesystem or to a
-            remote URL.
+            The upload source is limited to the local filesystem or to a remote
+            URL.
           </li>
           <li>
             The{' '}
