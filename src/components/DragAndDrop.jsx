@@ -118,23 +118,6 @@ const DragAndDrop = () => {
               />
             </div>
           ))}
-          {/* <ul>
-            {droppedFiles.map((droppedFile, index) => (
-              <li key={index}>
-                <strong>{droppedFile.file.name}</strong>
-                <br />
-                <img
-                  src={droppedFile.previewUrl}
-                  alt={`Preview of ${droppedFile.file.name}`}
-                  style={{
-                    maxWidth: '100%',
-                    maxHeight: '100px',
-                    marginTop: '5px',
-                  }}
-                />
-              </li>
-            ))}
-          </ul> */}
         </div>
       )}
     </>
