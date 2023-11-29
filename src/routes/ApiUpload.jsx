@@ -10,16 +10,16 @@ const ApiUpload = () => {
       <div className="m-2">
         Please note that the following defaults are being used:
         <ul className="list-disc list-inside">
-          <li>The sample uses the HTML5 Drag & Drop API</li>
+          <li>The sample uses the HTML5 Drag & Drop API.</li>
           <li>
             The{' '}
             <code className="bg-black text-gray-100 px-2 py-1 rounded-md text-sm">
               myphotoalbum-react
             </code>{' '}
             tag gets added to all photos uploaded via this method (this is used
-            in the photo album to retrieve images)
+            in the photo album to retrieve images).
           </li>
-          <li>Only images can be uploaded</li>
+          <li>Only images are displayed in the photo album, even though you can potentially upload other file types here too.</li>
         </ul>
       </div>
       <DragAndDrop />

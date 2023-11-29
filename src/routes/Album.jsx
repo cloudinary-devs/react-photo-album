@@ -44,7 +44,7 @@ const Album = () => {
             are displayed.
           </li>
           <li>
-            Images are transformed using the following option:{' '}
+            Images are transformed using the following actions:{' '}
             <code className="bg-black text-gray-100 px-2 py-1 rounded-md text-sm whitespace-normal overflow-auto break-words">
               .resize(thumbnail().width(300).height(300).gravity(autoGravity())).delivery(format(&apos;auto&apos;)).delivery(quality(&apos;auto&apos;));
             </code>
