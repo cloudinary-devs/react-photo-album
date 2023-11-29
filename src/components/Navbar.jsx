@@ -48,7 +48,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost text-xl">
-          Cloudinary
+          Cloudinary React Photo Album
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
