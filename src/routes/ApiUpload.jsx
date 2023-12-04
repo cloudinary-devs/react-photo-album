@@ -19,7 +19,10 @@ const ApiUpload = () => {
             tag gets added to all photos uploaded via this method (this is used
             in the photo album to retrieve images).
           </li>
-          <li>Only images are displayed in the photo album, even though you can potentially upload other file types here too.</li>
+          <li>
+            Only images are displayed in the photo album, even though you can
+            potentially upload other file types here too.
+          </li>
         </ul>
       </div>
       <DragAndDrop />
