@@ -30,13 +30,9 @@ const Album = () => {
           <li>
             Images are using the{' '}
             <code className="bg-black text-gray-100 px-2 py-1 rounded-md text-sm">
-              responsive()
-            </code>{' '}
-            and{' '}
-            <code className="bg-black text-gray-100 px-2 py-1 rounded-md text-sm">
               placeholder()
             </code>{' '}
-            plugins
+            plugin
           </li>
           <li>
             Images tagged as{' '}
