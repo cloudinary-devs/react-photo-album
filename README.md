@@ -1,5 +1,7 @@
 # Introduction
-This application showcases how to integrate the Cloudinary's React SDK. The sample project showcases the following functionality:
+This project demonstrates how to use the [Cloudinary React SDK](https://cloudinary.com/documentation/react_integration) to create a photo album app. 
+
+The sample project showcases the following functionality:
 
 * Using the Upload Widget
 * Uploading via API calls
