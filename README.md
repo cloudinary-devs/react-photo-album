@@ -3,7 +3,7 @@ This project demonstrates how to use the [Cloudinary React SDK](https://cloudina
 
 The sample project showcases the following functionality:
 
-* Using the Upload Widget
+* Using the [Upload Widget](https://cloudinary.com/documentation/upload_widget) to upload images to your product environment
 * Uploading via API calls
 * Displaying transformed images
 
