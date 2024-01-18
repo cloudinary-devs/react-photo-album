@@ -20,4 +20,18 @@ VITE_UPLOAD_PRESET='YOUR-UNSIGNED-UPLOAD-PRESET'
 
 # Run
 
-From your terminal run `npm run dev` and follow the instructions to see this sample project.
+From your terminal, in the **react-pa** folder, run: 
+
+* `npm i`
+* `npm run dev` 
+
+Then, click the localhost link to open the app in your browser.
+
+Try uploading images using each of the upload tabs, then see your images displayed in the Photo Album tab.
+
+# Explore
+
+* Take a look at the source code to understand how it works.  
+* Discover more in the [Cloudinary Docs](https://cloudinary.com/documentation).
+* Ask for help in our [Community Forum](https://community.cloudinary.com/), in [Discord](https://discord.gg/Cloudinary), or [raise a support request](https://support.cloudinary.com/hc/en-us/requests/new).
+
