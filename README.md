@@ -9,7 +9,7 @@ The sample project showcases the following functionality:
 
 # Setup
 
-Create an unsigned upload preset in your Cloudinary product environment and make note the name of the unsigned upload preset as well as your Cloudinary cloud name.
+[Create an unsigned upload preset](https://cloudinary.com/documentation/upload_presets#creating_and_managing_upload_presets) in your Cloudinary product environment and make note the name of the unsigned upload preset as well as your Cloudinary cloud name.
 
 Create a `.env` file with the following content at the root of the project:
 
